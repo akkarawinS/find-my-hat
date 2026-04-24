@@ -15,5 +15,5 @@ legalcheck เอาไว้เช็คlogic ถ้าเดินออกmap
  โดยการสรา้งarrayเปล่ามาก่อน ผ่าน method map 
  new Array(แถวแกนy).fill(0).map(() => new Array(แถวแกนX).fill('[]'))
 
-จากนั้นก็ใช้ for loop สร้าง
+จากนั้นก็ใช้ for loop สร้างหลุมแบบสุ่มผ่านmath.random
 ]
