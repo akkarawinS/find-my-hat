@@ -5,6 +5,7 @@ class Field {
         this.field = field;
         this.playerLocation = { x: 0, y: 0 };
         this.isPlaying = (true);
+        this.startLocation();
     }
 
 
@@ -52,26 +53,39 @@ class Field {
 
     static genField(h, w, p) {
         const field = new Array(h).fill(0).map(() => new Array(w).fill('[]'))
-        field[0][0] = '*';
-        
+
         for (let y = 0; y < h; y++) {
             for (let x = 0; x < w; x++) {
                 if (Math.random() < p) {
-                    field[y][x] = '[0]'
+                    field[y][x] = '[O]'
                 }
             }
         }
+        const pLocationX = Math.floor(Math.random() * w)
+        const pLocationY = Math.floor(Math.random() * h)
+        field[pLocationY][pLocationX] = '*'
+        // field[0][0] = '*'
+
         let hatX, hatY;
         do {
             hatX = Math.floor(Math.random() * w);
             hatY = Math.floor(Math.random() * h);
-        } while (hatX === 0 && hatY === 0);
+        } while (hatX === pLocationX && hatY === pLocationY);
 
         field[hatY][hatX] = '[H]';
 
         return field;
 
     };
+        startLocation() {
+        for (let y = 0; y < this.field.length; y++) {
+            const x = this.field[y].indexOf('*');
+            if (x !== -1) {
+                this.playerLocation = { x: x, y: y };
+                break;
+            }
+        }
+    }
 
 
 }
