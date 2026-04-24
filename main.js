@@ -50,19 +50,38 @@ class Field {
         }
     }
 
+    static genField(h, w, p) {
+        const field = new Array(h).fill(0).map(() => new Array(w).fill('[]'))
+        field[0][0] = '*';
+        
+        for (let y = 0; y < h; y++) {
+            for (let x = 0; x < w; x++) {
+                if (Math.random() < p) {
+                    field[y][x] = '[0]'
+                }
+            }
+        }
+        let hatX, hatY;
+        do {
+            hatX = Math.floor(Math.random() * w);
+            hatY = Math.floor(Math.random() * h);
+        } while (hatX === 0 && hatY === 0);
+
+        field[hatY][hatX] = '[H]';
+
+        return field;
+
+    };
+
 
 }
 
-const myField = new Field([
-    ['*', '[]', '[]'],
-    ['[]', '[O]', '[]'],
-    ['[]', '[]', '[H]'],
-]);
+const map = Field.genField(3, 3, 0.2);
+const myMap = new Field(map);
 
-while (myField.isPlaying) {
-    myField.printMap();
-    myField.moveInput();
+while (myMap.isPlaying) {
+    myMap.printMap();
+    myMap.moveInput();
 }
-
 
 
